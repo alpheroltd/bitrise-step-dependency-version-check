@@ -4,9 +4,7 @@ set -ex
 # --- Function to process package.resolved ---
 process_package_resolved() {
 
-  if [ -e "$PACKAGE_RESOLVED_FILE" ]; then
-    echo "Processing '$PACKAGE_RESOLVED_FILE'"
-  else
+  if [ ! -e "$PACKAGE_RESOLVED_FILE" ]; then
     echo "'$PACKAGE_RESOLVED_FILE' is either not a regular file or it doesn't exist. Skipping process package resolved."
     return
   fi
@@ -17,9 +15,7 @@ process_package_resolved() {
 # --- Function to process swift-outdated output ---
 process_swift_outdated() {
 
-  if [ -e "$PACKAGE_RESOLVED_FILE" ]; then
-    echo "Process swift outdated for '$PACKAGE_RESOLVED_FILE'"
-  else
+  if [ ! -e "$PACKAGE_RESOLVED_FILE" ]; then
     echo "'$PACKAGE_RESOLVED_FILE' is either not a regular file or it doesn't exist. Skipping process swift outdated."
     return
   fi
@@ -35,16 +31,12 @@ process_pod_outdated() {
   POD_FILE=$PROJECT_SOURCE_DIR/Podfile
   PODLOCK_FILE=$PROJECT_SOURCE_DIR/Podfile.lock
 
-  if [ -e "$POD_FILE" ]; then
-    echo "'$POD_FILE' exists"
-  else
+  if [ ! -e "$POD_FILE" ]; then
     echo "'$POD_FILE' is either not a regular file or it doesn't exist. Skipping process pod outdated."
     return
   fi
   
-  if [ -e "$PODLOCK_FILE" ]; then
-    echo "'$PODLOCK_FILE' exists"
-  else
+  if [ ! -e "$PODLOCK_FILE" ]; then
     echo "'$PODLOCK_FILE' is either not a regular file or it doesn't exist. Skipping process pod outdated."
     return
   fi
